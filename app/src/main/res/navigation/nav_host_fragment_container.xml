@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host_fragment_container"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.meowtee.timetocook.ui.splash.SplashFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_mainFragment_to_randomReceiptFragment"
+            app:destination="@id/randomReceiptFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/randomReceiptFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/randomReceiptFragment"
+        android:name="ru.meowtee.timetocook.ui.rand_receipt.RandomReceiptFragment"
+        android:label="RandomReceiptFragment"
+        tools:layout="@layout/fragment_random_receipt"/>
+</navigation>
