@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_logo"
+            android:transitionName="btnToLogo"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSearchName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/red_pastel_light"
+            android:text="Поиск по названию"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnSearchTags"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSearchTags"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/red_pastel_light"
+            android:text="Поиск по тегам"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnSearchName"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFavourite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/brown"
+            android:textColor="@color/white"
+            android:text="Избранные рецепты"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnSearchName"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPackages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/red_pastel_dark"
+            android:text="Мои папки рецептов"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnFavourite"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAllRecipes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/red_pastel_light"
+            android:text="Поиск по названию"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddRecipe"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPackages" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddRecipe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/red_pastel_light"
+            android:text="Поиск по тегам"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnAllRecipes"
+            app:layout_constraintTop_toTopOf="@+id/btnAllRecipes" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTooltips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/brown"
+            android:text="Советы для улучшения навыков"
+            android:paddingHorizontal="0dp"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddRecipe"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRandom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/red_pastel_dark"
+            android:text="Случайные рецепты"
+            android:textSize="35sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnTooltips"
+            tools:layout_editor_absoluteX="20dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

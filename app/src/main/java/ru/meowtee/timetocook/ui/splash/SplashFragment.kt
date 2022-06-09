@@ -10,6 +10,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.MaterialElevationScale
 import ru.meowtee.timetocook.databinding.FragmentSplashBinding
 import kotlin.properties.Delegates
 
@@ -21,6 +22,12 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSplashBinding.inflate(inflater)
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = 400L
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 400L
+        }
         return binding.root
     }
 

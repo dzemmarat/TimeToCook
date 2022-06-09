@@ -51,9 +51,9 @@
         android:id="@+id/rvRandomReceipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/rv_splash_layout_animation"
         android:paddingTop="12dp"
         android:visibility="gone"
-        android:layoutAnimation="@anim/rv_splash_layout_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -62,5 +62,17 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_receipt"
         tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_red_button"
+        android:padding="12dp"
+        android:src="@drawable/ic_close"
+        android:transitionName="btnToLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

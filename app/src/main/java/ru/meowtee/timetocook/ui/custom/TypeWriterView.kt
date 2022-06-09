@@ -2,11 +2,11 @@ package ru.meowtee.timetocook.ui.custom
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import kotlin.properties.Delegates
-
 
 class TypeWriterView : AppCompatTextView {
     private var mText: CharSequence? = null
@@ -18,15 +18,14 @@ class TypeWriterView : AppCompatTextView {
     private var animating = false
     private var mBlinker: Runnable by Delegates.notNull()
     private var i = 0
-    private val mHandler: Handler = Handler()
+    private val mHandler: Handler = Handler(Looper.getMainLooper())
     private val mCharacterAdder: Runnable = object : Runnable {
         override fun run() {
             if (animating) {
                 text = mText!!.subSequence(0, mIndex++).toString() + "_"
                 //typing typed
-                if (mTypeWriterListener != null) mTypeWriterListener!!.onCharacterTyped(
-                    mPrintingText,
-                    mIndex)
+                if (mTypeWriterListener != null)
+                    mTypeWriterListener!!.onCharacterTyped(mPrintingText, mIndex)
                 if (mIndex <= mText!!.length) {
                     mHandler.postDelayed(this, mDelay)
                 } else {
@@ -88,7 +87,7 @@ class TypeWriterView : AppCompatTextView {
      * @param delay
      */
     fun setDelay(delay: Int) {
-        if (delay >= 20 && delay <= 150) mDelay = delay.toLong()
+        if (delay in 20..150) mDelay = delay.toLong()
     }
 
     /**
@@ -98,7 +97,6 @@ class TypeWriterView : AppCompatTextView {
         mHandler.removeCallbacks(mCharacterAdder)
         animating = false
         text = mPrintingText
-
         //typing removed
         if (mTypeWriterListener != null) mTypeWriterListener!!.onTypingRemoved(mPrintingText)
     }

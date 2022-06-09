@@ -21,5 +21,59 @@
         android:id="@+id/randomReceiptFragment"
         android:name="ru.meowtee.timetocook.ui.rand_receipt.RandomReceiptFragment"
         android:label="RandomReceiptFragment"
-        tools:layout="@layout/fragment_random_receipt"/>
+        tools:layout="@layout/fragment_random_receipt">
+        <action
+            android:id="@+id/action_randomReceiptFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_randomReceiptFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewFragment"
+        android:name="ru.meowtee.timetocook.ui.add.AddNewFragment"
+        android:label="AddNewFragment"
+        tools:layout="@layout/fragment_add_recipe"/>
+    <fragment
+        android:id="@+id/receiptInfoFragment"
+        android:name="ru.meowtee.timetocook.ui.information.ReceiptInfoFragment"
+        android:label="ReceiptInfoFragment"
+        tools:layout="@layout/fragment_info_recipe"/>
+    <fragment
+        android:id="@+id/searchByNameFragment"
+        android:name="ru.meowtee.timetocook.ui.search.name.SearchByNameFragment"
+        android:label="SearchByNameFragment"
+        tools:layout="@layout/fragment_search_by_name">
+        <action
+            android:id="@+id/action_searchByNameFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Поиск по названию" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchByTagFragment"
+        android:name="ru.meowtee.timetocook.ui.search.tags.SearchByTagFragment"
+        android:label="SearchByTagFragment"
+        tools:layout="@layout/fragment_search_by_tag">
+        <action
+            android:id="@+id/action_searchByTagFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="ru.meowtee.timetocook.ui.menu.MainMenuFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_main_menu">
+        <action
+            android:id="@+id/action_homeFragment_to_searchByNameFragment"
+            app:destination="@id/searchByNameFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchByTagFragment"
+            app:destination="@id/searchByTagFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewFragment"
+            app:destination="@id/addNewFragment" />
+    </fragment>
 </navigation>

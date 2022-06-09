@@ -7,21 +7,24 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialContainerTransform
+import kotlinx.coroutines.flow.collect
 import ru.meowtee.timetocook.R
 import ru.meowtee.timetocook.core.extensions.show
-import ru.meowtee.timetocook.data.model.Receipt
 import ru.meowtee.timetocook.databinding.FragmentRandomReceiptBinding
 import ru.meowtee.timetocook.ui.custom.TypeWriterListener
 import ru.meowtee.timetocook.ui.rand_receipt.adapter.ReceiptsAdapter
+import ru.meowtee.timetocook.viewmodels.RandomReceiptViewModel
 import kotlin.properties.Delegates
 
 class RandomReceiptFragment : Fragment(), TypeWriterListener {
     private var binding: FragmentRandomReceiptBinding by Delegates.notNull()
+    private val viewModel: RandomReceiptViewModel by viewModels()
 
     private val receiptsAdapter by lazy { ReceiptsAdapter() }
 
@@ -37,6 +40,9 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTypeWriter()
+        binding.btnClose.setOnClickListener {
+            findNavController().navigate(R.id.action_randomReceiptFragment_to_homeFragment)
+        }
     }
 
     /**
@@ -47,6 +53,7 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
             drawingViewId = R.id.tvLogo
             duration = 400.toLong()
             scrimColor = Color.TRANSPARENT
+
             setAllContainerColors(requireContext().getColor(R.color.pink_dark))
         }
     }
@@ -67,12 +74,17 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = receiptsAdapter
         }
-        receiptsAdapter.setItems(
-            listOf(
-                Receipt(R.drawable.ic_dish_2,"Французскиe круасаны с шоколадным соусом", false, emptyList()),
-                Receipt(R.drawable.ic_dish,"Пряный тыквенный суп", false, emptyList()),
-            )
-        )
+        viewModel.startDatabase(requireContext())
+        setItems()
+        viewModel.findReceipts()
+    }
+
+    private fun setItems() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.receipts.collect {
+                receiptsAdapter.setItems(it)
+            }
+        }
     }
 
     override fun onTypingEnd(text: String?) {

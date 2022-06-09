@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink_light"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Поиск по тэгу"
+            android:textSize="45sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="По сложности"
+            android:textSize="36sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_difficult"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:chipSpacingVertical="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDish">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_pastel_light"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Простой"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_pastel_light"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Продвинутый"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_pastel_light"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Сложный"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="По типу"
+            android:textSize="36sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingVertical="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDish">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Завтрак"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Суп"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Основное блюдо"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Закуска"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Напитки"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/brown"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Десерт"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="По времени"
+            android:textSize="36sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingVertical="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDish">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_dark"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="За 30 минут"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_dark"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="За 1 час"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_dark"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="За 1.5 часа"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/red_dark"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_alternates_medium"
+                android:paddingVertical="4dp"
+                android:text="Более полутора часов"
+                android:textSize="14sp"
+                app:chipCornerRadius="100dp"
+                app:chipStrokeWidth="0dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рецепты"
+            android:textSize="45dp"
+            android:layout_marginTop="28dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvReceipts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            tools:listitem="@layout/item_receipt" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
