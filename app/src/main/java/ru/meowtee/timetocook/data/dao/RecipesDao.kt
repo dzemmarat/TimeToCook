@@ -14,4 +14,7 @@ interface RecipesDao {
 
     @Query("SELECT * FROM receipt")
     fun getAllRecipes(): List<Receipt>
+
+    @Query("SELECT * FROM receipt WHERE name LIKE '%' || :name  || '%'")
+    fun getRecipesByName(name: String): List<Receipt>
 }

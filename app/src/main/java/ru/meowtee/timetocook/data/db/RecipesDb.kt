@@ -61,6 +61,24 @@ abstract class RecipesDb : RoomDatabase() {
                 isFavourite = false,
                 tags = emptyList()
             ),
+            Receipt(
+                image = R.drawable.soup_cvetnaya_kapusta,
+                name = "Суп-пюре из цветной капусты",
+                isFavourite = false,
+                tags = emptyList()
+            ),
+            Receipt(
+                image = R.drawable.chiken_soup_mushroom,
+                name = "Куриный суп с шампиньонами и зеленью",
+                isFavourite = false,
+                tags = emptyList()
+            ),
+            Receipt(
+                image = R.drawable.potato_graten,
+                name = "Картофельный гратен",
+                isFavourite = false,
+                tags = emptyList()
+            ),
         )
     }
 }

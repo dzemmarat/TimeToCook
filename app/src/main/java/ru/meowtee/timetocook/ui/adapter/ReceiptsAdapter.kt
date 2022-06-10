@@ -1,4 +1,4 @@
-package ru.meowtee.timetocook.ui.rand_receipt.adapter
+package ru.meowtee.timetocook.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import ru.meowtee.timetocook.databinding.ItemReceiptBinding
 
 class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>() {
     private var items = emptyList<Receipt>()
+    private var onItemClickListener: () -> Unit = {}
 
     inner class ReceiptsViewHolder(private val binding: ItemReceiptBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Receipt) {
@@ -18,6 +19,10 @@ class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>
                 Glide.with(root)
                     .load(item.image)
                     .into(ivDish)
+
+                btnCheck.setOnClickListener {
+                    onItemClickListener()
+                }
             }
         }
     }
@@ -35,5 +40,10 @@ class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>
 
     fun setItems(newItems: List<Receipt>) {
         items = newItems
+        notifyDataSetChanged()
+    }
+
+    fun setOnItemClickListener(onItemClickListener: () -> Unit) {
+        this.onItemClickListener = onItemClickListener
     }
 }

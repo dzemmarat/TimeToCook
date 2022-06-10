@@ -20,10 +20,12 @@
             android:textSize="45sp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilQuery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:boxBackgroundColor="@color/pink_dark"
+            app:hintAnimationEnabled="false"
             app:boxCornerRadiusBottomEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopEnd="8dp"
@@ -31,10 +33,12 @@
             app:boxStrokeColor="@color/red_pastel_light">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietQuery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="10dp"
+                android:lines="1"
                 android:fontFamily="@font/montserrat_alternates"
                 android:hint="Введите название рецепта"
                 android:textColorHint="@color/gray"
@@ -45,9 +49,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReceipts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            tools:listitem="@layout/item_receipt" />
+            tools:listitem="@layout/item_receipt"
+            tools:itemCount="2" />
 
     </LinearLayout>
 
