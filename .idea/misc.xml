@@ -3,28 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_dot.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_oval_pink.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_receip_info_tab.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_receipt_info_tab.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_receipt_info_tab_selected.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_recipe_info_round.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_red_button.xml" value="0.2765" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_red_circle.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_red_outlined.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_round_white_button.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_round_white_button_bottom_round.xml" value="0.3725" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/bg_round_white_button_top_round.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2765" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_close.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_edit.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_heart.xml" value="0.34" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_heart_outline.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_heart_outlined.xml" value="0.2765" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_logo.xml" value="0.2905" />
+        <entry key="..\:/TimeToCook/app/src/main/res/drawable/ic_search.xml" value="0.34" />
         <entry key="..\:/TimeToCook/app/src/main/res/font/amatic_sc_bold.xml" value="0.4161458333333333" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout-land/activity_main.xml" value="0.3234375" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/activity_main.xml" value="0.3859375" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_add_recipe.xml" value="0.2348684210526316" />
-        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_info_recipe.xml" value="0.2348684210526316" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_info_recipe.xml" value="0.23257328990228013" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_ingredients.xml" value="0.23257328990228013" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_ingridients.xml" value="0.3207792207792208" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_main.xml" value="0.33" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_main_menu.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_random_receipt.xml" value="0.24375" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_receipt.xml" value="0.32412280701754387" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_recipes.xml" value="0.24375" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_search_by_name.xml" value="0.21296847114812612" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_search_by_tag.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_splash.xml" value="0.24375" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_caloric.xml" value="0.3090909090909091" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_chip.xml" value="0.35093815149409313" />
-        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_receipt.xml" value="0.42544229149115415" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient.xml" value="0.9" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_bottom.xml" value="0.2348684210526316" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_middle.xml" value="0.3131578947368421" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_top.xml" value="0.312280701754386" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_receipt.xml" value="0.24136807817589576" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_step.xml" value="0.3131578947368421" />
       </map>
     </option>
   </component>

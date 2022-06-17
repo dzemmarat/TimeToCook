@@ -2,9 +2,6 @@ package ru.meowtee.timetocook.ui.rand_receipt
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +12,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import ru.meowtee.timetocook.R
 import ru.meowtee.timetocook.core.extensions.show
 import ru.meowtee.timetocook.databinding.FragmentRandomReceiptBinding
-import ru.meowtee.timetocook.ui.custom.TypeWriterListener
 import ru.meowtee.timetocook.ui.adapter.ReceiptsAdapter
+import ru.meowtee.timetocook.ui.custom.TypeWriterListener
 import ru.meowtee.timetocook.viewmodels.RandomReceiptViewModel
 import kotlin.properties.Delegates
 
@@ -45,6 +41,8 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
         binding.btnClose.setOnClickListener {
             findNavController().navigate(R.id.action_randomReceiptFragment_to_homeFragment)
         }
+
+        setupRecycler()
     }
 
     /**
@@ -76,12 +74,14 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = receiptsAdapter
         }
-        receiptsAdapter.setOnItemClickListener {
-            findNavController().navigate(R.id.action_randomReceiptFragment_to_receiptInfoFragment)
+        receiptsAdapter.setOnItemClickListener { receipt ->
+            findNavController().navigate(RandomReceiptFragmentDirections.actionRandomReceiptFragmentToReceiptInfoFragment(
+                receipt = receipt
+            ))
         }
         viewModel.startDatabase(requireContext())
-        viewModel.findReceipts()
         setItems()
+        viewModel.findReceipts()
     }
 
     private fun setItems() {
@@ -95,11 +95,7 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
     override fun onTypingEnd(text: String?) {
         super.onTypingEnd(text)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            binding.tvRandomReceipt.show()
-            binding.rvRandomReceipt.show()
-
-            setupRecycler()
-        }, 400)
+        binding.tvRandomReceipt.show()
+        binding.rvRandomReceipt.show()
     }
 }

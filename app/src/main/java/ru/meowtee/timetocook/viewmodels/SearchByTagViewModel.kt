@@ -17,9 +17,6 @@ class SearchByTagViewModel: ViewModel() {
     private val _receipts = MutableStateFlow<List<Receipt>>(emptyList())
     val receipts: StateFlow<List<Receipt>> = _receipts
 
-    private val _difficult = MutableStateFlow(Difficult.IDLE)
-    val difficult: StateFlow<Difficult> = _difficult
-
     private val db by lazy { RecipesDb.getInstance(context) }
     private var context: Context by Delegates.notNull()
 
@@ -27,10 +24,6 @@ class SearchByTagViewModel: ViewModel() {
         ioThread {
             _receipts.value = db.recipesDao().getRecipesByName(q)
         }
-    }
-
-    fun setDifficult(difficult: Difficult) {
-        _difficult.value = difficult
     }
 
     fun startDatabase(context: Context) {

@@ -38,7 +38,11 @@
         android:id="@+id/receiptInfoFragment"
         android:name="ru.meowtee.timetocook.ui.information.ReceiptInfoFragment"
         android:label="ReceiptInfoFragment"
-        tools:layout="@layout/fragment_info_recipe"/>
+        tools:layout="@layout/fragment_info_recipe">
+        <argument
+            android:name="receipt"
+            app:argType="ru.meowtee.timetocook.data.model.Receipt" />
+    </fragment>
     <fragment
         android:id="@+id/searchByNameFragment"
         android:name="ru.meowtee.timetocook.ui.search.name.SearchByNameFragment"
@@ -76,4 +80,12 @@
             android:id="@+id/action_homeFragment_to_addNewFragment"
             app:destination="@id/addNewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ingredientsFragment"
+        android:name="ru.meowtee.timetocook.ui.information.ingridients.IngredientsFragment"
+        android:label="IngredientsFragment" />
+    <fragment
+        android:id="@+id/receiptFragment"
+        android:name="ru.meowtee.timetocook.ui.information.receipt.ReceiptFragment"
+        android:label="ReceiptFragment" />
 </navigation>

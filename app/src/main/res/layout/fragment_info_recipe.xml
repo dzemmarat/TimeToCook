@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/ivDish"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_dish"
@@ -36,7 +36,6 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/bg_receipt_info_tab"
                 app:layout_constraintEnd_toEndOf="@+id/btnEdit"
@@ -92,9 +91,11 @@
                 android:id="@+id/vpRecipeInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:saveEnabled="false"
                 android:layout_marginTop="26dp"
-                app:layout_constraintEnd_toEndOf="@+id/tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/tabLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

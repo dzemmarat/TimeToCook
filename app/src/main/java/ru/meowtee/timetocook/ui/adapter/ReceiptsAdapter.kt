@@ -9,19 +9,19 @@ import ru.meowtee.timetocook.databinding.ItemReceiptBinding
 
 class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>() {
     private var items = emptyList<Receipt>()
-    private var onItemClickListener: () -> Unit = {}
+    private var onItemClickListener: (title: Receipt) -> Unit = {}
 
     inner class ReceiptsViewHolder(private val binding: ItemReceiptBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Receipt) {
             with(binding) {
-                tvName.text = item.name
+                tvName.text = item.title
 
                 Glide.with(root)
                     .load(item.image)
                     .into(ivDish)
 
                 btnCheck.setOnClickListener {
-                    onItemClickListener()
+                    onItemClickListener(item)
                 }
             }
         }
@@ -36,6 +36,7 @@ class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>
         holder.bind(items[position])
     }
 
+
     override fun getItemCount() = items.size
 
     fun setItems(newItems: List<Receipt>) {
@@ -43,7 +44,7 @@ class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(onItemClickListener: () -> Unit) {
+    fun setOnItemClickListener(onItemClickListener: (receipt: Receipt) -> Unit) {
         this.onItemClickListener = onItemClickListener
     }
 }
