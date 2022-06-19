@@ -10,20 +10,25 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.meowtee.timetocook.core.extensions.ioThread
 import ru.meowtee.timetocook.data.db.RecipesDb
-import ru.meowtee.timetocook.data.model.Difficult
 import ru.meowtee.timetocook.data.model.Receipt
 import kotlin.properties.Delegates
 
-class SearchByTagViewModel: ViewModel() {
+class AllReceiptsViewModel: ViewModel() {
     private val _receipts = MutableStateFlow<List<Receipt>>(emptyList())
     val receipts: StateFlow<List<Receipt>> = _receipts
 
     private val db by lazy { RecipesDb.getInstance(context) }
     private var context: Context by Delegates.notNull()
 
-    fun findReceipts(q: String) {
+    fun findReceipts() {
         viewModelScope.launch(Dispatchers.IO) {
-            _receipts.value = db.recipesDao().getRecipesByName(q)
+            _receipts.value = db.recipesDao().getAllRecipes()
+        }
+    }
+
+    fun changeReceipt(receipt: Receipt) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.recipesDao().updateReceipt(receipt.copy(isFavourite = !receipt.isFavourite))
         }
     }
 

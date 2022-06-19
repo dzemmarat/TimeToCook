@@ -64,7 +64,7 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
     private fun setupTypeWriter() {
         binding.tvNow.apply {
             setDelay(400)
-            animateText("Сегодня")
+            animateText("Сейчас")
             setTypeWriterListener(this@RandomReceiptFragment)
         }
     }
@@ -78,6 +78,9 @@ class RandomReceiptFragment : Fragment(), TypeWriterListener {
             findNavController().navigate(RandomReceiptFragmentDirections.actionRandomReceiptFragmentToReceiptInfoFragment(
                 receipt = receipt
             ))
+        }
+        receiptsAdapter.setOnHeartClickListener { receipt ->
+            viewModel.changeReceipt(receipt)
         }
         viewModel.startDatabase(requireContext())
         setItems()

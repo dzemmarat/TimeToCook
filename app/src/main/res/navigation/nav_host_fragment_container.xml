@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_searchByTagFragment_to_receiptInfoFragment"
             app:destination="@id/receiptInfoFragment" />
+        <action
+            android:id="@+id/action_searchByTagFragment_to_receiptInfoFragment2"
+            app:destination="@id/receiptInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -79,6 +82,18 @@
         <action
             android:id="@+id/action_homeFragment_to_addNewFragment"
             app:destination="@id/addNewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allReceiptsFragment"
+            app:destination="@id/allReceiptsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_randomFragment"
+            app:destination="@id/randomFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recommendationsFragment"
+            app:destination="@id/recommendationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ingredientsFragment"
@@ -88,4 +103,36 @@
         android:id="@+id/receiptFragment"
         android:name="ru.meowtee.timetocook.ui.information.receipt.ReceiptFragment"
         android:label="ReceiptFragment" />
+    <fragment
+        android:id="@+id/allReceiptsFragment"
+        android:name="ru.meowtee.timetocook.ui.all.AllReceiptsFragment"
+        android:label="AllReceiptsFragment"
+        tools:layout="@layout/fragment_all_receipts">
+        <action
+            android:id="@+id/action_allReceiptsFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="ru.meowtee.timetocook.ui.favourite.FavouriteFragment"
+        android:label="FavouriteFragment"
+        tools:layout="@layout/fragment_favourites">
+        <action
+            android:id="@+id/action_favouriteFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/randomFragment"
+        android:name="ru.meowtee.timetocook.ui.random.RandomFragment"
+        android:label="RandomFragment"
+        tools:layout="@layout/fragment_random">
+        <action
+            android:id="@+id/action_randomFragment_to_receiptInfoFragment"
+            app:destination="@id/receiptInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendationsFragment"
+        android:name="ru.meowtee.timetocook.ui.recommendations.RecommendationsFragment"
+        android:label="RecommendationsFragment"
+        tools:layout="@layout/fragment_recommendation"/>
 </navigation>

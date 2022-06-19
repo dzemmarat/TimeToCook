@@ -1,32 +1,36 @@
 package ru.meowtee.timetocook.data.db
 
+import android.content.ContentValues
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import ru.meowtee.timetocook.R
 import ru.meowtee.timetocook.core.extensions.ioThread
 import ru.meowtee.timetocook.data.converter.ListsConverter
 import ru.meowtee.timetocook.data.dao.RecipesDao
+import ru.meowtee.timetocook.data.dao.RecommendationsDao
 import ru.meowtee.timetocook.data.db.RecipesDb.Companion.DATABASE_VERSION
 import ru.meowtee.timetocook.data.model.Ingredient
 import ru.meowtee.timetocook.data.model.Receipt
+import ru.meowtee.timetocook.data.model.Recommendation
 
 @Database(
     entities = [
-        Receipt::class
+        Receipt::class,
+        Recommendation::class
     ],
     version = DATABASE_VERSION,
     exportSchema = false
 )
 @TypeConverters(ListsConverter::class)
 abstract class RecipesDb : RoomDatabase() {
+    abstract fun recommendationsDao(): RecommendationsDao
     abstract fun recipesDao(): RecipesDao
 
     companion object {
-        const val DATABASE_VERSION = 6
+        const val DATABASE_VERSION = 8
         private const val DATABASE_NAME = "Recipes-Room"
 
         @Volatile
@@ -43,26 +47,39 @@ abstract class RecipesDb : RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         ioThread {
-                            getInstance(context).recipesDao().addRecipe(PREPOPULATE_DATA)
+                            PREPOPULATE_DATA_RECEIPTS.forEach {
+                                getInstance(context).recipesDao().addRecipe(it)
+                            }
+                            PREPOPULATE_DATA_RECOMMENDATIONS.forEach {
+                                getInstance(context).recommendationsDao().addRecommendation(it)
+                            }
                         }
                     }
 
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
-                        var recipes = emptyList<Receipt>()
+                        var recipes: List<Receipt>
+                        var recommendations: List<Recommendation>
                         ioThread {
                             recipes = getInstance(context).recipesDao().getAllRecipes()
-                        }
-                        if (recipes.isEmpty()) {
-                            ioThread {
-                                getInstance(context).recipesDao().addRecipe(PREPOPULATE_DATA)
+                            if (recipes.isEmpty()) {
+                                PREPOPULATE_DATA_RECEIPTS.forEach {
+                                    getInstance(context).recipesDao().addRecipe(it)
+                                }
+                            }
+
+                            recommendations = getInstance(context).recommendationsDao().getAllRecommendations()
+                            if (recommendations.isEmpty()) {
+                                PREPOPULATE_DATA_RECOMMENDATIONS.forEach {
+                                    getInstance(context).recommendationsDao().addRecommendation(it)
+                                }
                             }
                         }
                     }
 
                     override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
                         super.onDestructiveMigration(db)
-                        ioThread {
+                        runBlocking(Dispatchers.IO) {
                             getInstance(context).clearAllTables()
                         }
                     }
@@ -70,7 +87,7 @@ abstract class RecipesDb : RoomDatabase() {
                 .fallbackToDestructiveMigration()
                 .build()
 
-        private val PREPOPULATE_DATA = listOf(
+        private val PREPOPULATE_DATA_RECEIPTS = listOf(
             Receipt(
                 image = R.drawable.shakshuka,
                 title = "Шакшука",
@@ -222,6 +239,23 @@ abstract class RecipesDb : RoomDatabase() {
                         count = 0.0
                     ),
                 )
+            ),
+        )
+        val PREPOPULATE_DATA_RECOMMENDATIONS = listOf(
+            Recommendation(
+                title = "Хорошо прогревайте сковороду",
+                description = "Если не прогревать сковороду, то продукты будут либо пригорать, либо больше тушиться. \n" +
+                        "Капните на разогретую сковороду воды и если она мгновенно испарилась, то сковорода достаточно горячая"
+            ),
+            Recommendation(
+                title = "Варите овощи по таймеру",
+                description = "Речь идет о брокколи, спарже и других зеленых овощах. \n" +
+                        "Необходимо варить 3-7 минут в кипящей воде, а затем – самое важное – переложить овощи в кастрюлю с ледяной водой. Т.е.  “бланшировать” овощи. "
+            ),
+            Recommendation(
+                title = "Тушите на медленном огне",
+                description = "Жидкости должно быть столько, чтобы покрывать ингредиенты не более чем на половину.\n" +
+                        "После этого убавьте “огонь” на плите. Мелкие пузырьки могут появляться не чаще раза в 2-3 секунды, иначе уменьшите огонь"
             ),
         )
     }

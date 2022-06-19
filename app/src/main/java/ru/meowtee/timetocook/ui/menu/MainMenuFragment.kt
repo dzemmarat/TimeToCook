@@ -23,11 +23,25 @@ class MainMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnSearchName.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchByNameFragment)
-        }
-        binding.btnSearchTags.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchByTagFragment)
+        with(binding) {
+            btnSearchName.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_searchByNameFragment)
+            }
+            btnSearchTags.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_searchByTagFragment)
+            }
+            btnAllRecipes.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_allReceiptsFragment)
+            }
+            btnFavourite.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_favouriteFragment)
+            }
+            btnRandom.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_randomFragment)
+            }
+            btnRecommendations.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_recommendationsFragment)
+            }
         }
     }
 }

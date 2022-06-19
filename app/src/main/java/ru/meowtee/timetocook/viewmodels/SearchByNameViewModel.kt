@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -20,8 +21,14 @@ class SearchByNameViewModel: ViewModel() {
     private var context: Context by Delegates.notNull()
 
     fun findReceipts(q: String) {
-        ioThread {
+        viewModelScope.launch(Dispatchers.IO) {
             _receipts.value = db.recipesDao().getRecipesByName(q)
+        }
+    }
+
+    fun changeReceipt(receipt: Receipt) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.recipesDao().updateReceipt(receipt.copy(isFavourite = !receipt.isFavourite))
         }
     }
 

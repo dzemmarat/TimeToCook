@@ -1,32 +1,25 @@
-package ru.meowtee.timetocook.ui.search.name
+package ru.meowtee.timetocook.ui.favourite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.withContext
-import ru.meowtee.timetocook.R
-import ru.meowtee.timetocook.data.model.Receipt
-import ru.meowtee.timetocook.databinding.FragmentSearchByNameBinding
+import ru.meowtee.timetocook.databinding.FragmentAllReceiptsBinding
+import ru.meowtee.timetocook.databinding.FragmentFavouritesBinding
 import ru.meowtee.timetocook.ui.adapter.ReceiptsAdapter
-import ru.meowtee.timetocook.ui.rand_receipt.RandomReceiptFragmentDirections
-import ru.meowtee.timetocook.viewmodels.SearchByNameViewModel
+import ru.meowtee.timetocook.viewmodels.AllReceiptsViewModel
+import ru.meowtee.timetocook.viewmodels.FavouriteViewModel
 import kotlin.properties.Delegates
 
-class SearchByNameFragment : Fragment() {
-    private var binding: FragmentSearchByNameBinding by Delegates.notNull()
-    private val viewModel: SearchByNameViewModel by viewModels()
+class FavouriteFragment : Fragment() {
+    private var binding: FragmentFavouritesBinding by Delegates.notNull()
+    private val viewModel: FavouriteViewModel by viewModels()
 
     private val receiptsAdapter by lazy { ReceiptsAdapter() }
 
@@ -34,28 +27,25 @@ class SearchByNameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentSearchByNameBinding.inflate(inflater)
+        binding = FragmentFavouritesBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
-        binding.tietQuery.doOnTextChanged { text, _, _, _ ->
-            viewModel.findReceipts(text.toString())
-            receiptsAdapter.setItems(viewModel.receipts.value)
-        }
+        viewModel.findReceipts()
     }
 
     private fun setupRecycler() {
         binding.rvReceipts.apply {
-            layoutManager = object: LinearLayoutManager(requireContext()) {
+            layoutManager = object : LinearLayoutManager(requireContext()) {
                 override fun canScrollVertically(): Boolean = false
             }
             adapter = receiptsAdapter
         }
         receiptsAdapter.setOnItemClickListener { receipt ->
-            findNavController().navigate(SearchByNameFragmentDirections.actionSearchByNameFragmentToReceiptInfoFragment(
+            findNavController().navigate(FavouriteFragmentDirections.actionFavouriteFragmentToReceiptInfoFragment(
                 receipt = receipt
             ))
         }
@@ -63,5 +53,10 @@ class SearchByNameFragment : Fragment() {
             viewModel.changeReceipt(receipt)
         }
         viewModel.startDatabase(requireContext())
+        lifecycleScope.launchWhenCreated {
+            viewModel.receipts.collect {
+                receiptsAdapter.setItems(viewModel.receipts.value)
+            }
+        }
     }
 }
