@@ -9,10 +9,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import ru.meowtee.timetocook.R
 import ru.meowtee.timetocook.core.extensions.ioThread
 import ru.meowtee.timetocook.data.converter.ListsConverter
-import ru.meowtee.timetocook.data.db.RecipesDb.Companion.DATABASE_VERSION
-import ru.meowtee.timetocook.data.model.Receipt
 import ru.meowtee.timetocook.data.dao.RecipesDao
+import ru.meowtee.timetocook.data.db.RecipesDb.Companion.DATABASE_VERSION
 import ru.meowtee.timetocook.data.model.Ingredient
+import ru.meowtee.timetocook.data.model.Receipt
 
 @Database(
     entities = [
@@ -26,10 +26,11 @@ abstract class RecipesDb : RoomDatabase() {
     abstract fun recipesDao(): RecipesDao
 
     companion object {
-        const val DATABASE_VERSION = 2
+        const val DATABASE_VERSION = 6
         private const val DATABASE_NAME = "Recipes-Room"
 
-        @Volatile private var INSTANCE: RecipesDb? = null
+        @Volatile
+        private var INSTANCE: RecipesDb? = null
 
         fun getInstance(context: Context): RecipesDb =
             INSTANCE ?: synchronized(this) {
@@ -45,6 +46,26 @@ abstract class RecipesDb : RoomDatabase() {
                             getInstance(context).recipesDao().addRecipe(PREPOPULATE_DATA)
                         }
                     }
+
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        super.onOpen(db)
+                        var recipes = emptyList<Receipt>()
+                        ioThread {
+                            recipes = getInstance(context).recipesDao().getAllRecipes()
+                        }
+                        if (recipes.isEmpty()) {
+                            ioThread {
+                                getInstance(context).recipesDao().addRecipe(PREPOPULATE_DATA)
+                            }
+                        }
+                    }
+
+                    override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
+                        super.onDestructiveMigration(db)
+                        ioThread {
+                            getInstance(context).clearAllTables()
+                        }
+                    }
                 })
                 .fallbackToDestructiveMigration()
                 .build()
@@ -55,7 +76,8 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Шакшука",
                 isFavourite = false,
                 portions = 2,
-                time = 30,
+                rating = 3,
+                time = "30 мин.",
                 ingredients = listOf(
                     Ingredient(
                         name = "Оливковое масло",
@@ -109,6 +131,12 @@ abstract class RecipesDb : RoomDatabase() {
                         name = "Рубленная петрушка",
                         count = 0.0
                     ),
+                ),
+                steps = listOf(
+                    "Разогрейте оливковое масло в глубокой сковороде. Добавьте лук, пассеруйте до прозрачности, добавьте чеснок и томите еще минуту-две",
+                    "Добавьте порезанный болгарский перец – и готовьте еще 5–7 минут, после чего бросьте в сковороду помидоры и томатную пасту, и перемешайте. Теперь приправьте специями и сахаром. Снова перемешайте и снова готовьте 5–7 минут. Посолите, поперчите и добавьте приправы по вкусу",
+                    "По одному выпустите в сковороду яйца, накройте крышкой и готовьте 10–15 минут",
+                    "За это время соус чуть выпарится. Но следите за тем, чтобы он не выпарился совсем – иначе шакшука подгорит"
                 )
             ),
             Receipt(
@@ -116,7 +144,7 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Пряный тыквенный суп",
                 isFavourite = false,
                 portions = 0,
-                time = 30,
+                time = "30 мин.",
                 ingredients = listOf(
                     Ingredient(
                         name = "",
@@ -129,7 +157,7 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Суп-пюре из цветной капусты",
                 isFavourite = false,
                 portions = 6,
-                time = 15,
+                time = "15 мин",
                 ingredients = listOf(
                     Ingredient(
                         name = "Молотый черный перец",
@@ -174,7 +202,7 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Куриный суп с шампиньонами и зеленью",
                 isFavourite = false,
                 portions = 0,
-                time = 30,
+                time = "30 мин.",
                 ingredients = listOf(
                     Ingredient(
                         name = "",
@@ -187,7 +215,7 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Картофельный гратен",
                 isFavourite = false,
                 portions = 0,
-                time = 30,
+                time = "30 мин.",
                 ingredients = listOf(
                     Ingredient(
                         name = "",

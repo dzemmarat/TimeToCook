@@ -5,6 +5,11 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp" />
+
     <TextView
         android:id="@+id/tvStep"
         android:layout_width="16dp"
@@ -12,11 +17,12 @@
         android:background="@drawable/bg_red_circle"
         android:fontFamily="@font/montserrat_alternates_semibold"
         android:gravity="center"
+        android:textSize="10sp"
         android:text="1"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tvStepDescription"
@@ -24,8 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/montserrat_alternates"
+        android:textSize="15sp"
         android:text="Поместить тыкву, лук, чеснок, бульон и воду в кастрюлю. Жидкости должна не полностью закрывать тыкву. Довести до кипения, не накрывая крышкой,  а затем уменьшить огонь и довести тыкву до мягкого состояния"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvStep" />
+        app:layout_constraintStart_toEndOf="@+id/tvStep"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
