@@ -41,6 +41,8 @@ class ReceiptInfoFragment : Fragment() {
             .load(args.receipt.image)
             .into(binding.ivDish)
 
+
+
         setupTabLayoutAndPager()
         viewModel.startDatabase(requireContext())
 

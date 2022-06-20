@@ -23,7 +23,8 @@ class SearchByTagViewModel: ViewModel() {
 
     fun findReceipts(q: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _receipts.value = db.recipesDao().getRecipesByName(q)
+            _receipts.value = db.recipesDao().getRecipesByDifficult(q)
+            Log.e("AAAAAAAAAAAAA", _receipts.value.toString())
         }
     }
 

@@ -23,4 +23,7 @@ interface RecipesDao {
 
     @Query("SELECT * FROM receipt ORDER BY RANDOM() LIMIT 6")
     fun getRandomReceipts(): List<Receipt>
+
+    @Query("SELECT * FROM receipt WHERE difficult = :difficult")
+    fun getRecipesByDifficult(difficult: String) : List<Receipt>
 }

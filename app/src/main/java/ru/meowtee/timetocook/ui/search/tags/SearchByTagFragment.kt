@@ -1,19 +1,19 @@
 package ru.meowtee.timetocook.ui.search.tags
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.ChipGroup
-import ru.meowtee.timetocook.R
-import ru.meowtee.timetocook.data.model.Receipt
-import ru.meowtee.timetocook.databinding.FragmentMainMenuBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import ru.meowtee.timetocook.databinding.FragmentSearchByTagBinding
 import ru.meowtee.timetocook.ui.adapter.ReceiptsAdapter
-import ru.meowtee.timetocook.viewmodels.SearchByNameViewModel
 import ru.meowtee.timetocook.viewmodels.SearchByTagViewModel
 import kotlin.properties.Delegates
 
@@ -38,22 +38,31 @@ class SearchByTagFragment : Fragment() {
     }
 
     private fun setupChipDifficult() {
-        binding.chipGroupDifficult.setOnCheckedStateChangeListener { group, checkedIds ->
-            when(checkedIds[0]) {
-                R.id.easy -> {
-
-                }
-            }
+        binding.easy.setOnClickListener {
+            viewModel.findReceipts("Простой")
+        }
+        binding.medium.setOnClickListener {
+            viewModel.findReceipts("Средний")
+        }
+        binding.hard.setOnClickListener {
+            Log.e("AAAAAAAAAAAAA", viewModel.receipts.value.toString())
+            viewModel.findReceipts("Сложный")
         }
     }
 
     private fun setupRecycler() {
         binding.rvReceipts.apply {
-            layoutManager = object: LinearLayoutManager(requireContext()) {
+            layoutManager = object : LinearLayoutManager(requireContext()) {
                 override fun canScrollVertically(): Boolean = false
             }
             adapter = receiptsAdapter
         }
         viewModel.startDatabase(requireContext())
+        lifecycleScope.launch {
+            viewModel.receipts.collect {
+                Log.e("AAAAAAAAAAAAA", it.toString())
+                receiptsAdapter.setItems(it)
+            }
+        }
     }
 }

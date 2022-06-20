@@ -35,5 +35,8 @@ data class Receipt(
     val portions: Int = 0,
 
     @ColumnInfo(name = "steps")
-    val steps: MutableList<String> = mutableListOf()
+    val steps: MutableList<String> = mutableListOf(),
+
+    @ColumnInfo(name = "difficult")
+    val difficult: String = "Сложный",
 ) : Parcelable
