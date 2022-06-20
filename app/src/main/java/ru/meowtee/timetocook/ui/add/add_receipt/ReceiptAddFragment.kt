@@ -3,6 +3,7 @@ package ru.meowtee.timetocook.ui.add.add_receipt
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,11 @@ import ru.meowtee.timetocook.ui.adapter.StepAdapter
 import ru.meowtee.timetocook.ui.adapter.StepAddAdapter
 import kotlin.properties.Delegates
 
-class ReceiptAddFragment(private val receipt: Receipt) : Fragment() {
+class ReceiptAddFragment(val receipt: Receipt) : Fragment() {
     private var binding: FragmentAddReceiptBinding by Delegates.notNull()
-    private val stepAdapter by lazy { StepAddAdapter() }
-    var title = ""
-    var time = ""
+    val stepAdapter by lazy { StepAddAdapter() }
+
+    var steps = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,22 +39,26 @@ class ReceiptAddFragment(private val receipt: Receipt) : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = stepAdapter
         }
-        receipt.steps += ""
-        stepAdapter.setItems(receipt.steps)
-        stepAdapter.setOnEditTextAddedListener { item, position ->
-            receipt.steps[position] = item
+        steps += ""
+        stepAdapter.setItems(steps)
+        stepAdapter.setOnTextAddedListener { item, position ->
+            Log.e("AAAAAAAAAAAAA", "WORKRKRKR")
+            steps[position] = item
+            Log.e("AAAAAAAAAAAAA", steps.toString())
+        }
+        stepAdapter.setOnBeforeTextAddedListener { step, position ->
             Handler(Looper.getMainLooper()).postDelayed({
-                if (position == receipt.steps.size - 1) {
-                    receipt.steps.add("")
-                    stepAdapter.setItems(receipt.steps)
+                if (position == steps.size - 1) {
+                    steps.add("")
+                    stepAdapter.setItemsSilent(steps)
                 }
             },1000)
         }
         binding.etTitle.doAfterTextChanged {
-            title = it.toString()
+            receipt.title = it.toString()
         }
         binding.etTime.doAfterTextChanged {
-            time = it.toString()
+            receipt.time = it.toString()
         }
     }
 }

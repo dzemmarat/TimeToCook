@@ -1,20 +1,18 @@
 package ru.meowtee.timetocook.ui.adapter
 
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import ru.meowtee.timetocook.data.model.Ingredient
 import ru.meowtee.timetocook.databinding.ItemStepAddBinding
-import ru.meowtee.timetocook.databinding.ItemStepBinding
-import java.util.logging.Handler
 
 class StepAddAdapter : RecyclerView.Adapter<StepAddAdapter.StepAddViewHolder>() {
-    private var items = emptyList<String>()
-    private var onEditTextAdded: (step: String, position: Int) -> Unit = { _, _ -> }
+    private var items = mutableListOf<String>()
+    private var onAfterTextAdded: (step: String, position: Int) -> Unit = { _, _ -> }
+    private var onTextAdded: (step: String, position: Int) -> Unit = { _, _ -> }
+    private var onBeforeTextAdded: (step: String, position: Int) -> Unit = { _, _ -> }
 
     inner class StepAddViewHolder(private val binding: ItemStepAddBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,7 +20,13 @@ class StepAddAdapter : RecyclerView.Adapter<StepAddAdapter.StepAddViewHolder>() 
             with(binding) {
                 tvStep.text = position.plus(1).toString()
                 etStepDescription.doAfterTextChanged {
-                    onEditTextAdded(item, position)
+                    onAfterTextAdded(item, position)
+                }
+                etStepDescription.doOnTextChanged { text, start, before, count ->
+                    onTextAdded(text.toString(), position)
+                }
+                etStepDescription.doBeforeTextChanged { text, start, count, after ->
+                    onBeforeTextAdded(text.toString(), position)
                 }
             }
         }
@@ -40,11 +44,26 @@ class StepAddAdapter : RecyclerView.Adapter<StepAddAdapter.StepAddViewHolder>() 
     override fun getItemCount() = items.size
 
     fun setOnEditTextAddedListener(onEditTextAdded: (step: String, position: Int) -> Unit) {
-        this.onEditTextAdded = onEditTextAdded
+        this.onAfterTextAdded = onEditTextAdded
     }
 
-    fun setItems(newItems: List<String>) {
+    fun setOnTextAddedListener(onEditTextAdded: (step: String, position: Int) -> Unit) {
+        this.onTextAdded = onEditTextAdded
+    }
+
+    fun setOnBeforeTextAddedListener(onEditTextAdded: (step: String, position: Int) -> Unit) {
+        this.onBeforeTextAdded = onEditTextAdded
+    }
+
+    fun setItems(newItems: MutableList<String>) {
         items = newItems
         notifyDataSetChanged()
     }
+
+    fun setItemsSilent(newItems: MutableList<String>) {
+        items = newItems
+        notifyItemInserted(newItems.size - 1)
+    }
+
+    fun getItems() = items
 }

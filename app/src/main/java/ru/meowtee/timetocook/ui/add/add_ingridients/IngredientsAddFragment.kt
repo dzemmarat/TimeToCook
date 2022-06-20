@@ -12,12 +12,12 @@ import ru.meowtee.timetocook.databinding.FragmentAddIngredientsBinding
 import ru.meowtee.timetocook.ui.adapter.IngredientsAddAdapter
 import kotlin.properties.Delegates
 
-class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
+class IngredientsAddFragment(receipt: Receipt) : Fragment() {
     private var binding: FragmentAddIngredientsBinding by Delegates.notNull()
     private val ingredientsAdapter by lazy { IngredientsAddAdapter() }
 
-    private var count = receipt.copy().portions
-    private var ingredients = receipt.ingredients.map { it.copy() }.toMutableList()
+    var portions = receipt.copy().portions
+    var ingredients = receipt.ingredients.map { it.copy() }.toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvCount.text = count.toString()
+        binding.tvCount.text = portions.toString()
 
         binding.rvIngredients.apply {
             adapter = ingredientsAdapter
@@ -51,13 +51,13 @@ class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
         }
 
         binding.tvPlus.setOnClickListener {
-            count++
-            binding.tvCount.text = count.toString()
+            portions++
+            binding.tvCount.text = portions.toString()
         }
 
         binding.tvMinus.setOnClickListener {
-            count--
-            binding.tvCount.text = count.toString()
+            portions--
+            binding.tvCount.text = portions.toString()
         }
     }
 }

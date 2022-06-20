@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import ru.meowtee.timetocook.R
 
 @Parcelize
 @Entity(tableName = "receipt")
@@ -13,16 +14,16 @@ data class Receipt(
     val id: Int = 0,
 
     @ColumnInfo(name = "image")
-    val image: Int = 0,
+    val image: Int = R.drawable.ic_unknown,
 
     @ColumnInfo(name = "time")
-    val time: String = "0 мин",
+    var time: String = "0 мин",
 
     @ColumnInfo(name = "rating")
     val rating: Int = 0,
 
     @ColumnInfo(name = "name")
-    val title: String = "",
+    var title: String = "",
 
     @ColumnInfo(name = "isFavourite")
     var isFavourite: Boolean = false,

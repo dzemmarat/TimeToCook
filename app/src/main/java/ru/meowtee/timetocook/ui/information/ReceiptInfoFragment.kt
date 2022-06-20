@@ -1,6 +1,7 @@
 package ru.meowtee.timetocook.ui.information
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class ReceiptInfoFragment : Fragment() {
         setupTabLayoutAndPager()
         viewModel.startDatabase(requireContext())
 
+        Log.e("AAAAAAAAAAAAA", args.receipt.steps.toString())
         isFavourite = args.receipt.isFavourite
         binding.btnLike.apply {
             changeDrawableLike()

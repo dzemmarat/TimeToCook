@@ -1,6 +1,7 @@
 package ru.meowtee.timetocook.ui.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,8 @@ class AddNewFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding by Delegates.notNull()
     private val viewModel: AddNewViewModel by viewModels()
 
-    private val ingredientsAddFragment = IngredientsAddFragment(Receipt())
     private val receiptAddFragment = ReceiptAddFragment(Receipt())
+    private val ingredientsAddFragment = IngredientsAddFragment(Receipt())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +50,17 @@ class AddNewFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.btnDone.setOnClickListener {
+            Log.e("AAAAAAAAAAAAA", receiptAddFragment.steps.toString())
             viewModel.addReceipt(
                 Receipt(
-                    title = receiptAddFragment.title
+                    steps = receiptAddFragment.stepAdapter.getItems(),
+                    title = receiptAddFragment.receipt.title,
+                    time = receiptAddFragment.receipt.time,
+                    ingredients = ingredientsAddFragment.ingredients,
+                    portions = ingredientsAddFragment.portions
                 )
             )
+            findNavController().navigate(R.id.action_addNewFragment_to_homeFragment)
         }
     }
 
