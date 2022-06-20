@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class Ingredient(
 
     @ColumnInfo(name = "name")
-    val name: String = "",
+    var name: String = "",
 
     @ColumnInfo(name = "count")
     var count: Double = 0.0,

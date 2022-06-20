@@ -28,11 +28,11 @@ data class Receipt(
     var isFavourite: Boolean = false,
 
     @ColumnInfo(name = "ingredients")
-    val ingredients: List<Ingredient> = emptyList(),
+    var ingredients: List<Ingredient> = emptyList(),
 
     @ColumnInfo(name = "portions")
     val portions: Int = 0,
 
     @ColumnInfo(name = "steps")
-    val steps: List<String> = emptyList()
+    val steps: MutableList<String> = mutableListOf()
 ) : Parcelable

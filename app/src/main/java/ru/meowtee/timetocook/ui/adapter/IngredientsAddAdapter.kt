@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.bumptech.glide.Glide
 import ru.meowtee.timetocook.data.model.Ingredient
-import ru.meowtee.timetocook.data.model.Receipt
-import ru.meowtee.timetocook.databinding.*
+import ru.meowtee.timetocook.databinding.ItemIngridientBottomAddBinding
+import ru.meowtee.timetocook.databinding.ItemIngridientMiddleAddBinding
+import ru.meowtee.timetocook.databinding.ItemIngridientTopAddBinding
 
 class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.ReceiptsViewHolder>() {
     private var items = emptyList<Ingredient>()
@@ -23,6 +23,11 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
                 1 -> {
                     with(binding as ItemIngridientTopAddBinding) {
                         etTitle.doAfterTextChanged {
+                            item.name = it.toString()
+                            onEditTextAdded(item, position)
+                        }
+                        etCount.doAfterTextChanged {
+                            item.count = it.toString().toDoubleOrNull() ?: 0.0
                             onEditTextAdded(item, position)
                         }
                     }
@@ -35,11 +40,19 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
                     }
                 }
                 else -> {
-                    with(binding as ItemIngridientMiddleAddBinding) {}
+                    with(binding as ItemIngridientMiddleAddBinding) {
+                        etTitle.doAfterTextChanged {
+                            item.name = it.toString()
+                            onEditTextAdded(item, position)
+                        }
+                        etCount.doAfterTextChanged {
+                            item.count = it.toString().toDoubleOrNull() ?: 0.0
+                            onEditTextAdded(item, position)
+                        }
+                    }
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiptsViewHolder {

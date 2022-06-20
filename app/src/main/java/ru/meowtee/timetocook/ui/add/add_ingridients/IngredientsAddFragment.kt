@@ -17,7 +17,7 @@ class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
     private val ingredientsAdapter by lazy { IngredientsAddAdapter() }
 
     private var count = receipt.copy().portions
-    private var ingredients = receipt.ingredients.map { it.copy() }
+    private var ingredients = receipt.ingredients.map { it.copy() }.toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +38,16 @@ class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
             }
         }
 
-        ingredients = ingredients + listOf(Ingredient("", 0.0))
+        ingredients += mutableListOf(Ingredient("", 0.0))
         ingredientsAdapter.setItems(ingredients)
 
         ingredientsAdapter.setOnAddBtnClickListener {
-            ingredients = ingredients + listOf(Ingredient("", 0.0))
+            ingredients += mutableListOf(Ingredient("", 0.0))
             ingredientsAdapter.setItems(ingredients)
+        }
+
+        ingredientsAdapter.setOnEditTextAddedListener { ingredient, position ->
+            ingredients[position] = ingredient
         }
 
         binding.tvPlus.setOnClickListener {
