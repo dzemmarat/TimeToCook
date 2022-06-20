@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.meowtee.timetocook.R
@@ -18,8 +19,9 @@ import kotlin.properties.Delegates
 
 class ReceiptAddFragment(private val receipt: Receipt) : Fragment() {
     private var binding: FragmentAddReceiptBinding by Delegates.notNull()
-
     private val stepAdapter by lazy { StepAddAdapter() }
+    var title = ""
+    var time = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,12 @@ class ReceiptAddFragment(private val receipt: Receipt) : Fragment() {
                     stepAdapter.setItems(receipt.steps)
                 }
             },1000)
+        }
+        binding.etTitle.doAfterTextChanged {
+            title = it.toString()
+        }
+        binding.etTime.doAfterTextChanged {
+            time = it.toString()
         }
     }
 }
