@@ -42,7 +42,7 @@ class SearchByTagFragment : Fragment() {
             viewModel.findReceipts("Простой")
         }
         binding.medium.setOnClickListener {
-            viewModel.findReceipts("Средний")
+            viewModel.findReceipts("Продвинутый")
         }
         binding.hard.setOnClickListener {
             Log.e("AAAAAAAAAAAAA", viewModel.receipts.value.toString())

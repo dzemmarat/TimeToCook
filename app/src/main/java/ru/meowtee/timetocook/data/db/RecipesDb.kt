@@ -1,8 +1,10 @@
 package ru.meowtee.timetocook.data.db
 
-import android.content.ContentValues
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -68,7 +70,8 @@ abstract class RecipesDb : RoomDatabase() {
                                 }
                             }
 
-                            recommendations = getInstance(context).recommendationsDao().getAllRecommendations()
+                            recommendations =
+                                getInstance(context).recommendationsDao().getAllRecommendations()
                             if (recommendations.isEmpty()) {
                                 PREPOPULATE_DATA_RECOMMENDATIONS.forEach {
                                     getInstance(context).recommendationsDao().addRecommendation(it)
@@ -149,6 +152,7 @@ abstract class RecipesDb : RoomDatabase() {
                         count = 0.0
                     ),
                 ),
+                difficult = "Простой",
                 steps = mutableListOf(
                     "Разогрейте оливковое масло в глубокой сковороде. Добавьте лук, пассеруйте до прозрачности, добавьте чеснок и томите еще минуту-две",
                     "Добавьте порезанный болгарский перец – и готовьте еще 5–7 минут, после чего бросьте в сковороду помидоры и томатную пасту, и перемешайте. Теперь приправьте специями и сахаром. Снова перемешайте и снова готовьте 5–7 минут. Посолите, поперчите и добавьте приправы по вкусу",
@@ -157,16 +161,53 @@ abstract class RecipesDb : RoomDatabase() {
                 )
             ),
             Receipt(
-                image = R.drawable.ic_dish,
-                title = "Пряный тыквенный суп",
-                isFavourite = false,
-                portions = 0,
-                time = "30 мин.",
+                image = R.drawable.kobler,
+                title = "Коблер",
+                portions = 6,
+                time = "40 мин.",
                 ingredients = listOf(
                     Ingredient(
-                        name = "",
-                        count = 0.0
+                        name = "Яблоки",
+                        count = 5.0
                     ),
+                    Ingredient(
+                        name = "Финики",
+                        count = 1.0
+                    ),
+                    Ingredient(
+                        name = "Мед",
+                        count = 2.0
+                    ),
+                    Ingredient(
+                        name = "Лимонный сок",
+                        count = 1.0
+                    ),
+                    Ingredient(
+                        name = "Ваниль",
+                        count = 0.5
+                    ),
+                    Ingredient(
+                        name = "Соль",
+                        count = 0.25
+                    ),
+                    Ingredient(
+                        name = "Молотый имбирь",
+                        count = 0.25
+                    ),
+                    Ingredient(
+                        name = "Орехи",
+                        count = 1.0
+                    ),
+                    Ingredient(
+                        name = "Кокосовый масло",
+                        count = 1.0
+                    ),
+                ),
+                steps = mutableListOf(
+                    "Яблоки очистить, вынуть сердцевину и мелко порезать",
+                    "Орехи перемолоть в комбайне. Добавить соль, ваниль, кокосовое масло и четверть стакана фиников. Перемолоть еще раз. Отдельно перемолоть оставшиеся финики со всеми остальными ингредиентами",
+                    "В формы для запекания (лучше использовать порционные) выложить яблоки, затем — смесь фиников с медом, лимонным соком и имбирем. Перемешать. Сверху закрыть смесью с молотыми орехами",
+                    "Запекать в духовке при 200 градусов около 30 минут до появления золотистого цвета"
                 )
             ),
             Receipt(
@@ -175,6 +216,7 @@ abstract class RecipesDb : RoomDatabase() {
                 isFavourite = false,
                 portions = 6,
                 time = "15 мин",
+                difficult = "Продвинутый",
                 ingredients = listOf(
                     Ingredient(
                         name = "Молотый черный перец",
@@ -212,32 +254,143 @@ abstract class RecipesDb : RoomDatabase() {
                         name = "Цветная капуста",
                         count = 1.0
                     ),
+                ),
+                steps = mutableListOf(
+                    "Цветную капусту разобрать на соцветия, самые маленькие из них сварить целиком в подсоленной воде, а крупные порезать на более мелкие части",
+                    "Как только маленькие соцветия сварятся, надо их тут же остудить, чтобы сохранить состояние аль-денте",
+                    "Параллельно надо растопить в сотейнике или кастрюле сливочное масло и обжарить на нем мелкорубленый порей (только белую часть), не забывая все время перемешивать, чтобы не дать луку потемнеть",
+                    "Влить в кастрюлю молоко, добавить нарезанные соцветия капусты и оставить вариться на небольшом огне в течение пяти минут. Молоко при этом не должно бурно кипеть, а лишь спокойно побулькивать. Через пять минут влить в кастрюлю горячий куриный бульон и варить, пока капуста не станет совсем мягкой",
+                    "Снять с огня. Посолить, поперчить по вкусу, добавить мелко нарезанную петрушку, сливки и прокрутить суп в блендере. Подавать в глубокой тарелке, положив в нее маленькие похрустывающие соцветия цветной капусты и немного красной икры"
                 )
             ),
             Receipt(
-                image = R.drawable.chiken_soup_mushroom,
-                title = "Куриный суп с шампиньонами и зеленью",
+                image = R.drawable.tvor_zap,
+                title = "Творожная запеканка в микроволновке",
                 isFavourite = false,
-                portions = 0,
-                time = "30 мин.",
+                portions = 2,
+                time = "10 мин.",
+                difficult = "Простой",
                 ingredients = listOf(
                     Ingredient(
-                        name = "",
+                        name = "Творог",
+                        count = 220.0
+                    ),
+                    Ingredient(
+                        name = "Овсяные хлопья",
+                        count = 30.0
+                    ),
+                    Ingredient(
+                        name = "Куриное яйцо",
                         count = 0.0
                     ),
+                    Ingredient(
+                        name = "Мед",
+                        count = 0.0
+                    ),
+                    Ingredient(
+                        name = "Курага",
+                        count = 0.0
+                    ),
+                    Ingredient(
+                        name = "Корица",
+                        count = 0.0
+                    ),
+                ),
+                steps = mutableListOf(
+                    "Смешайте в миске творог, яйцо, мед и овсяные хлопья до однородной массы. Мед можно заменить сахаром или сахарозаменителем",
+                    "Добавьте нарезанную курагу и корицу. Перемешайте. При желании можно использовать другие сухофрукты и немного орехов",
+                    "Поставьте готовую массу в микроволновку на 5 минут"
                 )
             ),
             Receipt(
                 image = R.drawable.potato_graten,
                 title = "Картофельный гратен",
                 isFavourite = false,
-                portions = 0,
-                time = "30 мин.",
+                portions = 8,
+                time = "60 мин.",
                 ingredients = listOf(
                     Ingredient(
-                        name = "",
+                        name = "Картофель",
+                        count = 3.0
+                    ),
+                    Ingredient(
+                        name = "Молоко",
+                        count = 250.0
+                    ),
+                    Ingredient(
+                        name = "Вода",
+                        count = 250.0
+                    ),
+                    Ingredient(
+                        name = "Чеснок",
+                        count = 1.0
+                    ),
+                    Ingredient(
+                        name = "Сливочное масло",
+                        count = 50.0
+                    ),
+                    Ingredient(
+                        name = "Молотый черный перец",
                         count = 0.0
                     ),
+                    Ingredient(
+                        name = "Твердый сыр",
+                        count = 70.0
+                    ),
+                    Ingredient(
+                        name = "Соль",
+                        count = 0.0
+                    ),
+                    Ingredient(
+                        name = "Мускатный орех",
+                        count = 0.0
+                    ),
+                    Ingredient(
+                        name = "Сметана",
+                        count = 150.0
+                    ),
+                ),
+                steps = mutableListOf(
+                    "В маленькой кастрюльке соединить молоко с водой, посолить, поперчить и добавить порубленный зубчик чеснока. Довести до кипения",
+                    "В это время помыть и почистить картофель. Порезать кружками толщиной 4–5 мм",
+                    "Отправить картофель в кипящее молоко, чуть снизить температуру и варить 10–15 минут. Следить, чтобы кружки не разваливались. Слить картофельную воду",
+                    "Форму для запекания смазать сливочным маслом. Выложить картофель. Смазать сметаной. Сверху выложить кусочки сливочного масла и посыпать сыром",
+                    "Отправить в духовку на 40 минут и запекаться при 180 градусах"
+                )
+            ),
+            Receipt(
+                image = R.drawable.ruletiki,
+                title = "Рулетики из баклажанов",
+                isFavourite = false,
+                difficult = "Простой",
+                portions = 2,
+                time = "20 мин.",
+                ingredients = listOf(
+                    Ingredient(
+                        name = "Баклажаны",
+                        count = 1.0
+                    ),
+                    Ingredient(
+                        name = "Сыр",
+                        count = 200.0
+                    ),
+                    Ingredient(
+                        name = "Чеснок",
+                        count = 3.0
+                    ),
+                    Ingredient(
+                        name = "Майонез",
+                        count = 100.0
+                    ),
+                    Ingredient(
+                        name = "Помидоры",
+                        count = 1.0
+                    ),
+                ),
+                steps = mutableListOf(
+                    "У баклажана отрезаем плодоножку и нарезаем вдоль на пластины. Обжариваем с двух сторон до готовности",
+                    "Делаем начинку. Для этого смешиваем майонез, тертый сыр и чеснок",
+                    "Каждую пластинку смазываем начинкой, кладем ломтик помидора и сворачиваем в рулет"
                 )
             ),
         )
