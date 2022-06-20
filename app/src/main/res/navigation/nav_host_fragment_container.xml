@@ -97,11 +97,11 @@
     </fragment>
     <fragment
         android:id="@+id/ingredientsFragment"
-        android:name="ru.meowtee.timetocook.ui.information.ingridients.IngredientsFragment"
+        android:name="ru.meowtee.timetocook.ui.add.add_ingridients.IngredientsFragment"
         android:label="IngredientsFragment" />
     <fragment
         android:id="@+id/receiptFragment"
-        android:name="ru.meowtee.timetocook.ui.information.receipt.ReceiptFragment"
+        android:name="ru.meowtee.timetocook.ui.add.add_receipt.ReceiptFragment"
         android:label="ReceiptFragment" />
     <fragment
         android:id="@+id/allReceiptsFragment"

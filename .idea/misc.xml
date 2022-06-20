@@ -27,6 +27,8 @@
         <entry key="..\:/TimeToCook/app/src/main/res/font/amatic_sc_bold.xml" value="0.4161458333333333" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout-land/activity_main.xml" value="0.3234375" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/activity_main.xml" value="0.23257328990228013" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_add_ingredients.xml" value="0.24375" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_add_receipt.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_add_recipe.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_all_receipts.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/fragment_favourites.xml" value="0.2348684210526316" />
@@ -47,11 +49,15 @@
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_chip.xml" value="0.35093815149409313" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient.xml" value="0.9" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_bottom.xml" value="0.2348684210526316" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_bottom_add.xml" value="0.24375" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_middle.xml" value="0.3131578947368421" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_middle_add.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_top.xml" value="0.312280701754386" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_ingridient_top_add.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_receipt.xml" value="0.23257328990228013" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_recommendation.xml" value="0.2348684210526316" />
         <entry key="..\:/TimeToCook/app/src/main/res/layout/item_step.xml" value="0.3131578947368421" />
+        <entry key="..\:/TimeToCook/app/src/main/res/layout/item_step_add.xml" value="0.2348684210526316" />
       </map>
     </option>
   </component>

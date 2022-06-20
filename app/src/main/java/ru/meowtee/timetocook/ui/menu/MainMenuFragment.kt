@@ -42,6 +42,9 @@ class MainMenuFragment : Fragment() {
             btnRecommendations.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_recommendationsFragment)
             }
+            btnAddRecipe.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_addNewFragment)
+            }
         }
     }
 }
