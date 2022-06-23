@@ -32,7 +32,7 @@ abstract class RecipesDb : RoomDatabase() {
     abstract fun recipesDao(): RecipesDao
 
     companion object {
-        const val DATABASE_VERSION = 10
+        const val DATABASE_VERSION = 11
         private const val DATABASE_NAME = "Recipes-Room"
 
         @Volatile

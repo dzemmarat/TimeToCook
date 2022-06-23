@@ -22,18 +22,21 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.ReceiptsViewH
                 1 -> {
                     with(binding as ItemIngridientTopBinding) {
                         tvTitle.text = item.name
+                        tvCountMeasure.text = item.measure
                         tvCount.text = item.count.toString()
                     }
                 }
                 3 -> {
                     with(binding as ItemIngridientBottomBinding) {
                         tvTitle.text = item.name
+                        tvCountMeasure.text = item.measure
                         tvCount.text = item.count.toString()
                     }
                 }
                 else -> {
                     with(binding as ItemIngridientMiddleBinding) {
                         tvTitle.text = item.name
+                        tvCountMeasure.text = item.measure
                         tvCount.text = item.count.toString()
                     }
                 }

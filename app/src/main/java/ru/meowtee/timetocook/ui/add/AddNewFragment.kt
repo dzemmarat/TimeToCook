@@ -65,7 +65,8 @@ class AddNewFragment : Fragment() {
                     title = receiptAddFragment.receipt.title,
                     time = receiptAddFragment.receipt.time,
                     ingredients = ingredientsAddFragment.ingredients,
-                    portions = ingredientsAddFragment.portions
+                    portions = ingredientsAddFragment.portions,
+                    rating = receiptAddFragment.rating
                 )
             )
             findNavController().navigate(R.id.action_addNewFragment_to_homeFragment)

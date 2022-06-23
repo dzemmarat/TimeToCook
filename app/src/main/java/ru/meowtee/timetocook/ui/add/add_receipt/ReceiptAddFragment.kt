@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.meowtee.timetocook.R
@@ -23,6 +24,7 @@ class ReceiptAddFragment(val receipt: Receipt) : Fragment() {
     val stepAdapter by lazy { StepAddAdapter() }
 
     var steps = receipt.steps
+    var rating = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +39,11 @@ class ReceiptAddFragment(val receipt: Receipt) : Fragment() {
 
         binding.etTitle.setText(receipt.title)
         binding.etTime.setText(receipt.time)
-        binding.tvRating.text = receipt.rating.toString()
+        binding.etRating.setText(receipt.rating.toString())
+
+        binding.etRating.doOnTextChanged { text, start, before, count ->
+            rating = text.toString().toIntOrNull() ?: 0
+        }
 
         binding.rvSteps.apply {
             layoutManager = LinearLayoutManager(requireContext())

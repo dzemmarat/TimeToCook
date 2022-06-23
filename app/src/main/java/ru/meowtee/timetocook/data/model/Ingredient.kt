@@ -14,4 +14,7 @@ data class Ingredient(
 
     @ColumnInfo(name = "count")
     var count: Double = 0.0,
+
+    @ColumnInfo(name = "measure")
+    var measure: String = "шт.",
 ) : Parcelable

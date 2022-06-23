@@ -3,6 +3,7 @@ package ru.meowtee.timetocook.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ru.meowtee.timetocook.data.model.Ingredient
@@ -23,8 +24,13 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
                 1 -> {
                     with(binding as ItemIngridientTopAddBinding) {
                         etCount.setText(item.count.toString())
+                        etCountMeasure.setText(item.measure)
                         etTitle.setText(item.name)
 
+                        etCountMeasure.doAfterTextChanged {
+                            item.measure = it.toString()
+                            onEditTextAdded(item, position)
+                        }
                         etTitle.doAfterTextChanged {
                             item.name = it.toString()
                             onEditTextAdded(item, position)
@@ -46,6 +52,12 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
                     with(binding as ItemIngridientMiddleAddBinding) {
                         etCount.setText(item.count.toString())
                         etTitle.setText(item.name)
+                        etCountMeasure.setText(item.measure)
+
+                        etCountMeasure.doAfterTextChanged {
+                            item.measure = it.toString()
+                            onEditTextAdded(item, position)
+                        }
 
                         etTitle.doAfterTextChanged {
                             item.name = it.toString()
