@@ -39,4 +39,13 @@ data class Receipt(
 
     @ColumnInfo(name = "difficult")
     val difficult: String = "Сложный",
+
+    @ColumnInfo(name = "type")
+    val type: String = "Завтрак",
+
+    @ColumnInfo(name = "timeTag")
+    val timeTag: String = "За 1 час",
+
+    @ColumnInfo(name = "tags")
+    val tags: String = "$difficult $type $timeTag",
 ) : Parcelable

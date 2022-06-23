@@ -25,7 +25,9 @@ class ReceiptsAdapter : RecyclerView.Adapter<ReceiptsAdapter.ReceiptsViewHolder>
                     .load(item.image)
                     .into(ivDish)
 
-                binding.chipDifficult.text = item.difficult
+                chipDifficult.text = item.difficult
+                chipTime.text = item.timeTag
+                chipType.text = item.type
 
                 btnCheck.setOnClickListener {
                     onItemClickListener(item)

@@ -84,6 +84,33 @@
             app:chipCornerRadius="12dp"
             app:chipStrokeWidth="0dp" />
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Завтрак"
+            android:backgroundTint="@color/brown"
+            android:clickable="false"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_alternates"
+            android:paddingVertical="4dp"
+            app:chipCornerRadius="12dp"
+            app:chipStrokeWidth="0dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="За 1 час"
+            android:backgroundTint="@color/red_pastel_dark"
+            android:clickable="false"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_alternates"
+            android:paddingVertical="4dp"
+            app:chipCornerRadius="12dp"
+            app:chipStrokeWidth="0dp" />
+
     </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

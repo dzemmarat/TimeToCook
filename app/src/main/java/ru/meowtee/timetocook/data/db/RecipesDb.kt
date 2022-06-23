@@ -32,7 +32,7 @@ abstract class RecipesDb : RoomDatabase() {
     abstract fun recipesDao(): RecipesDao
 
     companion object {
-        const val DATABASE_VERSION = 9
+        const val DATABASE_VERSION = 10
         private const val DATABASE_NAME = "Recipes-Room"
 
         @Volatile
@@ -96,6 +96,8 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Шакшука",
                 isFavourite = false,
                 portions = 2,
+                type = "Основное блюдо",
+                timeTag = "За 30 минут",
                 rating = 3,
                 time = "30 мин.",
                 ingredients = listOf(
@@ -165,6 +167,8 @@ abstract class RecipesDb : RoomDatabase() {
                 title = "Коблер",
                 portions = 6,
                 time = "40 мин.",
+                type = "Завтрак",
+                timeTag = "За 1 час",
                 ingredients = listOf(
                     Ingredient(
                         name = "Яблоки",

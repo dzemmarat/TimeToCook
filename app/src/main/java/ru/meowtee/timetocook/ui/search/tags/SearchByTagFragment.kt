@@ -21,6 +21,10 @@ class SearchByTagFragment : Fragment() {
     private var binding: FragmentSearchByTagBinding by Delegates.notNull()
     private val viewModel: SearchByTagViewModel by viewModels()
 
+    private var difficultTag = ""
+    private var timeTag = ""
+    private var typeTag = ""
+
     private val receiptsAdapter by lazy { ReceiptsAdapter() }
 
     override fun onCreateView(
@@ -35,18 +39,76 @@ class SearchByTagFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupChipDifficult()
+        setupChipTime()
+        setupChipType()
     }
 
     private fun setupChipDifficult() {
         binding.easy.setOnClickListener {
-            viewModel.findReceipts("Простой")
+            difficultTag = "Простой"
+            findReceipts()
         }
         binding.medium.setOnClickListener {
-            viewModel.findReceipts("Продвинутый")
+            difficultTag = "Продвинутый"
+            findReceipts()
         }
         binding.hard.setOnClickListener {
-            Log.e("AAAAAAAAAAAAA", viewModel.receipts.value.toString())
-            viewModel.findReceipts("Сложный")
+            difficultTag = "Сложный"
+            findReceipts()
+        }
+    }
+
+    private fun setupChipType() {
+        with(binding) {
+            breakfast.setOnClickListener {
+                typeTag = "Завтрак"
+                findReceipts()
+            }
+            soup.setOnClickListener {
+                typeTag = "Суп"
+                findReceipts()
+            }
+            base.setOnClickListener {
+                typeTag = "Основное блюдо"
+                findReceipts()
+            }
+            snack.setOnClickListener {
+                typeTag = "Закуска"
+                findReceipts()
+            }
+            drinks.setOnClickListener {
+                typeTag = "Напиток"
+                findReceipts()
+            }
+            desert.setOnClickListener {
+                typeTag = "Десерт"
+                findReceipts()
+            }
+        }
+    }
+
+    private fun findReceipts() {
+        viewModel.findReceipts("$difficultTag $typeTag $timeTag")
+    }
+
+    private fun setupChipTime() {
+        with(binding) {
+            fast.setOnClickListener {
+                timeTag = "За 30 минут"
+                findReceipts()
+            }
+            middle.setOnClickListener {
+                timeTag = "За 1 час"
+                findReceipts()
+            }
+            middlePlus.setOnClickListener {
+                timeTag = "За 1.5 часа"
+                findReceipts()
+            }
+            longest.setOnClickListener {
+                timeTag = "Более полутора часов"
+                findReceipts()
+            }
         }
     }
 

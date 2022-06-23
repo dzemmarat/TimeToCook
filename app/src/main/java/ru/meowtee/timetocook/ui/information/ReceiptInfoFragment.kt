@@ -41,12 +41,9 @@ class ReceiptInfoFragment : Fragment() {
             .load(args.receipt.image)
             .into(binding.ivDish)
 
-
-
         setupTabLayoutAndPager()
         viewModel.startDatabase(requireContext())
 
-        Log.e("AAAAAAAAAAAAA", args.receipt.steps.toString())
         isFavourite = args.receipt.isFavourite
         binding.btnLike.apply {
             changeDrawableLike()
