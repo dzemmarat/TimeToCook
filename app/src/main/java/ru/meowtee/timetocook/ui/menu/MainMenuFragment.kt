@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ru.meowtee.timetocook.R
+import ru.meowtee.timetocook.data.model.Receipt
 import ru.meowtee.timetocook.databinding.FragmentMainMenuBinding
 import kotlin.properties.Delegates
 
@@ -43,7 +44,8 @@ class MainMenuFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_recommendationsFragment)
             }
             btnAddRecipe.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_addNewFragment)
+                findNavController().navigate(MainMenuFragmentDirections.actionHomeFragmentToAddNewFragment(
+                    Receipt()))
             }
         }
     }

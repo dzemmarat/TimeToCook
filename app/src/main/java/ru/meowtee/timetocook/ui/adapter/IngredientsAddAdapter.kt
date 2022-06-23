@@ -22,6 +22,9 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
             when (viewType) {
                 1 -> {
                     with(binding as ItemIngridientTopAddBinding) {
+                        etCount.setText(item.count.toString())
+                        etTitle.setText(item.name)
+
                         etTitle.doAfterTextChanged {
                             item.name = it.toString()
                             onEditTextAdded(item, position)
@@ -41,6 +44,9 @@ class IngredientsAddAdapter : RecyclerView.Adapter<IngredientsAddAdapter.Receipt
                 }
                 else -> {
                     with(binding as ItemIngridientMiddleAddBinding) {
+                        etCount.setText(item.count.toString())
+                        etTitle.setText(item.name)
+
                         etTitle.doAfterTextChanged {
                             item.name = it.toString()
                             onEditTextAdded(item, position)

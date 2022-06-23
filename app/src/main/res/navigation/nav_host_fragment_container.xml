@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_addNewFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="receipt"
+            app:argType="ru.meowtee.timetocook.data.model.Receipt"/>
     </fragment>
     <fragment
         android:id="@+id/receiptInfoFragment"
@@ -46,6 +49,9 @@
         <argument
             android:name="receipt"
             app:argType="ru.meowtee.timetocook.data.model.Receipt" />
+        <action
+            android:id="@+id/action_receiptInfoFragment_to_addNewFragment"
+            app:destination="@id/addNewFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchByNameFragment"

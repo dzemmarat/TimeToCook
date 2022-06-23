@@ -22,7 +22,7 @@ class ReceiptAddFragment(val receipt: Receipt) : Fragment() {
     private var binding: FragmentAddReceiptBinding by Delegates.notNull()
     val stepAdapter by lazy { StepAddAdapter() }
 
-    var steps = mutableListOf<String>()
+    var steps = receipt.steps
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +34,10 @@ class ReceiptAddFragment(val receipt: Receipt) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.etTitle.setText(receipt.title)
+        binding.etTime.setText(receipt.time)
+        binding.tvRating.text = receipt.rating.toString()
 
         binding.rvSteps.apply {
             layoutManager = LinearLayoutManager(requireContext())

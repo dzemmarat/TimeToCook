@@ -18,6 +18,7 @@ class StepAddAdapter : RecyclerView.Adapter<StepAddAdapter.StepAddViewHolder>() 
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String, position: Int) {
             with(binding) {
+                etStepDescription.setText(item)
                 tvStep.text = position.plus(1).toString()
                 etStepDescription.doAfterTextChanged {
                     onAfterTextAdded(item, position)

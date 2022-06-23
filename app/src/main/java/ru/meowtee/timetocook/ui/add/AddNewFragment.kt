@@ -14,24 +14,27 @@ import com.google.android.material.tabs.TabLayoutMediator
 import ru.meowtee.timetocook.R
 import ru.meowtee.timetocook.data.model.Receipt
 import ru.meowtee.timetocook.databinding.FragmentAddRecipeBinding
-import ru.meowtee.timetocook.databinding.FragmentInfoRecipeBinding
-import ru.meowtee.timetocook.databinding.FragmentMainMenuBinding
 import ru.meowtee.timetocook.ui.adapter.InfoFragmentAdapter
 import ru.meowtee.timetocook.ui.add.add_ingridients.IngredientsAddFragment
 import ru.meowtee.timetocook.ui.add.add_receipt.ReceiptAddFragment
-import ru.meowtee.timetocook.ui.information.ReceiptInfoFragmentArgs
-import ru.meowtee.timetocook.ui.information.ingridients.IngredientsFragment
-import ru.meowtee.timetocook.ui.information.receipt.ReceiptFragment
 import ru.meowtee.timetocook.viewmodels.AddNewViewModel
-import ru.meowtee.timetocook.viewmodels.ReceiptInfoViewModel
 import kotlin.properties.Delegates
 
 class AddNewFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding by Delegates.notNull()
     private val viewModel: AddNewViewModel by viewModels()
+    private val args: AddNewFragmentArgs by navArgs()
 
-    private val receiptAddFragment = ReceiptAddFragment(Receipt())
-    private val ingredientsAddFragment = IngredientsAddFragment(Receipt())
+    private val receiptAddFragment by lazy {
+        ReceiptAddFragment(
+            args.receipt
+        )
+    }
+    private val ingredientsAddFragment by lazy {
+        IngredientsAddFragment(
+            args.receipt
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,12 @@ class AddNewFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        Glide.with(requireContext())
+            .load(args.receipt.image)
+            .into(binding.ivDish)
+
         setupTabLayoutAndPager()
+
         viewModel.startDatabase(requireContext())
         binding.btnClose.setOnClickListener {
             findNavController().popBackStack()

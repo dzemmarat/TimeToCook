@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
@@ -56,6 +57,12 @@ class ReceiptInfoFragment : Fragment() {
             if (isTimerEnabled) binding.tvClock.start()
             else binding.tvClock.stop()
             isTimerEnabled = !isTimerEnabled
+        }
+
+        binding.btnEdit.setOnClickListener {
+            findNavController().navigate(ReceiptInfoFragmentDirections.actionReceiptInfoFragmentToAddNewFragment(
+                receipt = args.receipt
+            ))
         }
     }
 

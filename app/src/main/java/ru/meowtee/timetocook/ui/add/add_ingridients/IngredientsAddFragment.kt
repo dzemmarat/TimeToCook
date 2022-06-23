@@ -12,7 +12,7 @@ import ru.meowtee.timetocook.databinding.FragmentAddIngredientsBinding
 import ru.meowtee.timetocook.ui.adapter.IngredientsAddAdapter
 import kotlin.properties.Delegates
 
-class IngredientsAddFragment(receipt: Receipt) : Fragment() {
+class IngredientsAddFragment(private val receipt: Receipt) : Fragment() {
     private var binding: FragmentAddIngredientsBinding by Delegates.notNull()
     private val ingredientsAdapter by lazy { IngredientsAddAdapter() }
 
