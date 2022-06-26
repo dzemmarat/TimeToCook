@@ -61,7 +61,8 @@ class ReceiptInfoFragment : Fragment() {
 
         binding.btnEdit.setOnClickListener {
             findNavController().navigate(ReceiptInfoFragmentDirections.actionReceiptInfoFragmentToAddNewFragment(
-                receipt = args.receipt
+                receipt = args.receipt,
+                isEditable = true
             ))
         }
     }

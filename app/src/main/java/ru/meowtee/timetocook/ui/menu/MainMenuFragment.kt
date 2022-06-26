@@ -45,7 +45,9 @@ class MainMenuFragment : Fragment() {
             }
             btnAddRecipe.setOnClickListener {
                 findNavController().navigate(MainMenuFragmentDirections.actionHomeFragmentToAddNewFragment(
-                    Receipt()))
+                    Receipt()
+                )
+                )
             }
         }
     }

@@ -59,16 +59,35 @@ class AddNewFragment : Fragment() {
         }
         binding.btnDone.setOnClickListener {
             Log.e("AAAAAAAAAAAAA", receiptAddFragment.steps.toString())
-            viewModel.addReceipt(
-                Receipt(
-                    steps = receiptAddFragment.stepAdapter.getItems(),
-                    title = receiptAddFragment.receipt.title,
-                    time = receiptAddFragment.receipt.time,
-                    ingredients = ingredientsAddFragment.ingredients,
-                    portions = ingredientsAddFragment.portions,
-                    rating = receiptAddFragment.rating
+            if (!args.isEditable) {
+                viewModel.addReceipt(
+                    Receipt(
+                        steps = receiptAddFragment.stepAdapter.getItems(),
+                        title = receiptAddFragment.receipt.title,
+                        time = receiptAddFragment.receipt.time,
+                        ingredients = ingredientsAddFragment.ingredients,
+                        portions = ingredientsAddFragment.portions,
+                        rating = receiptAddFragment.rating
+                    )
                 )
-            )
+            } else {
+                viewModel.editReceipt(
+                    Receipt(
+                        id = args.receipt.id,
+                        image = args.receipt.image,
+                        isFavourite = args.receipt.isFavourite,
+                        difficult = args.receipt.difficult,
+                        timeTag = args.receipt.timeTag,
+                        type = args.receipt.type,
+                        steps = receiptAddFragment.stepAdapter.getItems(),
+                        title = receiptAddFragment.receipt.title,
+                        time = receiptAddFragment.receipt.time,
+                        ingredients = ingredientsAddFragment.ingredients,
+                        portions = ingredientsAddFragment.portions,
+                        rating = receiptAddFragment.rating
+                    )
+                )
+            }
             findNavController().navigate(R.id.action_addNewFragment_to_homeFragment)
         }
     }

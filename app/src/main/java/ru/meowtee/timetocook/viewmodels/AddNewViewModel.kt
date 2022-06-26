@@ -26,6 +26,12 @@ class AddNewViewModel: ViewModel() {
         }
     }
 
+    fun editReceipt(receipt: Receipt) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.recipesDao().updateReceipt(receipt)
+        }
+    }
+
     fun startDatabase(context: Context) {
         this.context = context
     }
